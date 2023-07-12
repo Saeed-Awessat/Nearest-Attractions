@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { coordinatesContext } from "../../App";
 import { CoordinatesContextType } from "../../Types/Coordinates";
 import { getNearestAttractions } from "../../api/appRequest";
+import { calcDistance } from "../../util/functions";
 
 const ListOfAttractions = () => {
   const { coordinates } = useContext(
@@ -38,7 +39,6 @@ const ListOfAttractions = () => {
 
   return (
     <div>
-      <div>List Of Attractions</div>
       {neareastAttractions && neareastAttractions.length > 0 && (
         <table className="table">
           <thead>
@@ -47,7 +47,7 @@ const ListOfAttractions = () => {
               <th>Attraction ID</th>
               <th>Attraction Address</th>
               <th>Opening Hours</th>
-              <th>Distance</th>
+              <th>Distance in Kilometers</th>
               <th>Product Url</th>
               <th></th>
             </tr>
@@ -60,11 +60,18 @@ const ListOfAttractions = () => {
                   <td>{data.Id}</td>
                   <td>{data.Address}</td>
                   <td>{data.Opening_Hours ?? ""}</td>
-                  <td>{""}</td>
+                  <td>
+                    {calcDistance(
+                      { latitude: data.X, longitude: data.Y },
+                      coordinates
+                    ).toFixed(4)}
+                  </td>
                   <td>{data.Product_Url}</td>
                   <td>
                     <button onClick={() => addToFavorite(index, data)}>
-                      Add to Favorite
+                      {!items[index]
+                        ? "Add to Favorite"
+                        : "Remove from Favorite"}
                     </button>
                   </td>
                 </tr>
