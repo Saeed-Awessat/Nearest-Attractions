@@ -1,0 +1,28 @@
+{
+  "name": "nearest-attractions",
+  "version": "1.0.0",
+  "description": "find the Nearest-Attractions of my position",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc && concurrently \"npx tsc --watch\" \"nodemon -q  dist/index.js\""
+  },
+  "author": "Saeed Awessat",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "pg": "^8.10.0",
+    "sequelize": "^6.28.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.13.0",
+    "@types/node-cron": "^3.0.7",
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.5"
+  }
+}
